@@ -1,0 +1,352 @@
+:root {
+  --cols: 8;
+  --rows: 8;
+
+  --border: 0 solid var(--black);
+
+  --black: hsl(220, 4%, 15%);
+  --black-t90: hsla(216, 4%, 15%, 0.9);
+  --black-dark: hsl(216, 4%, 14%);
+  --blue: hsl(199, 77%, 74%);
+  --blue-dark: hsl(199, 77%, 34%);
+  --bluegreen: hsl(177, 51%, 74%);
+  --brown: hsl(28, 22%, 42%);
+  --gray: hsl(216, 4%, 25%);
+  --gray-light: hsl(216, 4%, 35%);
+  --green: hsl(120, 60%, 67%);
+  --lime: hsl(87, 97%, 72%);
+  --mauve: hsl(0, 23%, 71%);
+  --mint: hsl(153, 70%, 80%);
+  --orange: hsl(9, 100%, 65%);
+  --pea: hsl(97, 58%, 78%);
+  --persian: hsl(346, 11%, 62%);
+  --purple: hsl(295, 13%, 66%);
+  --red: hsl(3, 100%, 69%);
+  --turquoise: hsl(179, 28%, 69%);
+  --white: hsl(255, 100%, 100%);
+
+  --marker-1: var(--persian);
+  --marker-2: var(--purple);
+  --marker-3: var(--blue);
+  --marker-4: var(--turquoise);
+  --marker-5: var(--bluegreen);
+  --marker-6: var(--mint);
+  --marker-7: var(--green);
+  --marker-9: var(--pea);
+  --marker-10: var(--lime);
+  --marker-11: var(--brown);
+  --marker-12: var(--orange);
+  --marker-13: var(--mauve);
+  --marker-sunken: var(--blue-dark);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: "Roboto Flex", sans-serif;
+  font-size: 16px;
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+button, input {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+button {
+  padding: 0.25rem 1rem;
+  line-height: 1.5rem;
+  cursor: pointer;
+  background-color: var(--blue);
+  border: 0;
+  border-radius: 0.5rem;
+  color: var(--black);
+  font-weight: 600;
+}
+
+button:active {
+  background-color: var(--turquoise);
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+header img {
+  display: block;
+  max-width: 50vw;
+  max-height: 68px;
+}
+
+.counters-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto 2rem;
+  width: min(min(94vw,94vh), 720px);
+}
+
+.counters-wrap button {
+  margin-right: calc(min(94vw, 94vh, 720px) / 15 * 14 / var(--cols) * 0.1);
+}
+
+.counters {
+  padding-left: calc(min(94vw, 94vh, 720px) / 15 * 1.1);
+}
+
+.counters label {
+  padding-right: 0.75rem;
+}
+
+.counters input {
+  margin-left: 0.25rem;
+  padding: 0;
+  width: 2rem;
+  line-height: 2rem;
+  background-color: var(--blue);
+  border: 0;
+  border-radius: 50%;
+  color: var(--black);
+  font-weight: 700;
+  text-align: center;
+}
+
+.counters input#ship-counter {
+  background-color: var(--blue-dark);
+  color: var(--white);
+}
+
+.board-wrap {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "zero cols"
+    "rows board";
+  grid-template-columns: 1fr 14fr;
+  grid-template-rows: 1fr 14fr;
+  margin: 0 auto;
+  width: min(94vw, 94vh, 720px);
+  height: min(94vw, 94vh, 720px);
+}
+
+#zero-head {
+  grid-area: zero;
+}
+
+#cols-head,
+#rows-head {
+  color: var(--gray);
+}
+
+#cols-head {
+  grid-area: cols;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#rows-head {
+  grid-area: rows;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#board {
+  grid-area: board;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+.cell::after {
+  display: block;
+  content: "";
+  width: 80%;
+  height: 80%;
+  background-color: var(--gray);
+  border-radius: 0.5rem;
+}
+
+.cell:hover::after {
+  background-color: var(--gray-light);
+}
+
+.cell.selected {
+  cursor: default;
+}
+
+.cell.selected:not([data-shiptype])::after {
+  background-color: var(--black-dark);
+}
+
+.cell[data-shiptype="1"]::after {
+  background-color: var(--marker-1);
+}
+
+.cell[data-shiptype="2"]::after {
+  background-color: var(--marker-2);
+}
+
+.cell[data-shiptype="3"]::after {
+  background-color: var(--marker-3);
+}
+
+.cell[data-shiptype="4"]::after {
+  background-color: var(--marker-4);
+}
+
+.cell[data-shiptype="5"]::after {
+  background-color: var(--marker-5);
+}
+
+.cell[data-shiptype="6"]::after {
+  background-color: var(--marker-6);
+}
+
+.cell[data-shiptype="7"]::after {
+  background-color: var(--marker-7);
+}
+
+.cell[data-shiptype="8"]::after {
+  background-color: var(--marker-8);
+}
+
+.cell[data-shiptype="8"]::after {
+  background-color: var(--marker-9);
+}
+
+.cell[data-shiptype="8"]::after {
+  background-color: var(--marker-10);
+}
+
+.cell[data-shiptype="8"]::after {
+  background-color: var(--marker-11);
+}
+
+.cell[data-shiptype="8"]::after {
+  background-color: var(--marker-12);
+}
+
+.cell[data-shiptype="8"]::after {
+  background-color: var(--marker-13);
+}
+
+.cell.sunken::after {
+  background-color: var(--marker-sunken);
+}
+
+#message-box {
+  display: none;
+}
+
+#message-box.active {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--black-t90);
+}
+
+#message-box[data-type="won"] b,
+#message-box[data-type="won"] button {
+  background-color: var(--green);
+}
+
+#message-box[data-type="won"] h3 {
+  color: var(--green);
+}
+
+#message-box[data-type="lost"] b,
+#message-box[data-type="lost"] button {
+  background-color: var(--red);
+}
+
+#message-box[data-type="lost"] h3 {
+  color: var(--red);
+}
+
+#message-box .inner {
+  position: relative;
+  margin-top: 2.5rem;
+  padding: 3.5rem 2rem 3rem;
+  width: min(432px, 90%);
+  background-color: var(--white);
+  border-radius: 0.25rem;
+  box-shadow: 0 0 2.5rem 0.5rem var(--black);
+  color: var(--black);
+  font-size: 1.125rem;
+  font-weight: 100;
+  text-align: center;
+}
+
+#message-box h3 {
+  margin: 1rem 0;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+#message-box h4 {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 800;
+}
+
+#message-box b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -2.5rem;
+  left: calc(50% - 2.5rem);
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--blue);
+  border: 0.5rem solid var(--black);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+#message-box button {
+  margin-top: 1.5rem;
+  padding: 0.25rem 2rem;
+  text-transform: uppercase;
+}
