@@ -56,10 +56,24 @@ html, body {
   font-size: 16px;
   font-optical-sizing: auto;
   font-weight: 400;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 button, input {
-  font-family: "Roboto Flex", sans-serif;
+  font: inherit;
+  font-size: 0.8125rem;
 }
 
 button {
@@ -112,6 +126,7 @@ header img {
 }
 
 .counters input {
+  opacity: 1;
   margin-left: 0.25rem;
   padding: 0;
   width: 2rem;
@@ -122,11 +137,13 @@ header img {
   color: var(--black);
   font-weight: 700;
   text-align: center;
+  -webkit-text-fill-color: var(--black);
 }
 
 .counters input#ship-counter {
   background-color: var(--blue-dark);
   color: var(--white);
+  -webkit-text-fill-color: var(--white);
 }
 
 .board-wrap {
@@ -349,4 +366,12 @@ header img {
   margin-top: 1.5rem;
   padding: 0.25rem 2rem;
   text-transform: uppercase;
+}
+
+#message-box[data-type="lost"] button:active {
+  background-color: var(--mauve);
+}
+
+#message-box[data-type="won"] button:active {
+  background-color: var(--turquoise);
 }

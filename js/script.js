@@ -118,8 +118,8 @@ import { createEl, getRandomInt } from "./utils.js";
     if (rowEl !== -1) return;
 
     setSunken(shipType);
-    SHIPCOUNTER.value = parseInt(SHIPCOUNTER.value) + 1;
-    parseInt(SHIPCOUNTER.value) === SHIPS && showGameOver("won");
+    SHIPCOUNTER.value = SHIPCOUNTER.valueAsNumber + 1;
+    SHIPCOUNTER.valueAsNumber === SHIPS && showGameOver("won");
   };
 
   const setSunken = (shipType) => {
@@ -160,7 +160,7 @@ import { createEl, getRandomInt } from "./utils.js";
       const col = dataset.col;
       const row = dataset.row;
 
-      SHOTCOUNTER.value = parseInt(SHOTCOUNTER.value) + 1;
+      SHOTCOUNTER.value = SHOTCOUNTER.valueAsNumber + 1;
       addMarker(col, row);
     }
   };
